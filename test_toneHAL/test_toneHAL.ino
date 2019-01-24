@@ -1,11 +1,18 @@
 #include "toneHAL.h"
+#if defined(ESP8266) 
+#elif defined(ESP32)
+#elif defined(ARDUINO_AVR_PRO)
+#include "toneHAL_PRO.h"
+#elif defined(ARDUINO_ARCH_SAMD)
+#include "toneHAL_M0.h"
+#endif
+
 #include <VarioSettings.h>
 #include <SPI.h>
 //#include <SD.h>
 #include "SdFat.h"
 SdFat SD;
 
-#define SD_CS_PIN SDCARD_SS_PIN   //SS
 File myFile;
 
 ToneHAL toneHAL;
@@ -19,14 +26,12 @@ void setup() {
   // put your setup code here, to run once:
   SerialPort.begin(115200);
 
-  pinMode(LED_BUILTIN, OUTPUT);
-  digitalWrite(LED_BUILTIN, LOW);
-  pinMode(7, OUTPUT);
-  digitalWrite(7, HIGH);
+  pinMode(LED, OUTPUT);
+  digitalWrite(LED, LOW);
 
   SerialPort.print("Initializing SD card...");
 
-  if (!SD.begin(SD_CS_PIN)) {
+  if (!SD.begin(SDCARD_CS_PIN)) {
     SerialPort.println("initialization failed!");
 //    return;
   }
@@ -54,6 +59,8 @@ void setup() {
   delay(15000);
   toneHAL.noTone();
   delay(2000); */
+
+#if defined(TONEDAC)
   
   SerialPort.println("Tone Square");
   toneHAL.setWaveForm(WAVEFORM_SQUARE);
@@ -76,18 +83,21 @@ void setup() {
   toneHAL.beginPlayWav(sampleRateWav);
 //  toneHAL.playWav(filename);
   SerialPort.println("Playing file.....");
+#endif //TONEDAC
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(LED, HIGH);
   delay(200);
-  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(LED, LOW);
   delay(200);
   if (SerialPort.available()) {
     char c = SerialPort.read();
     if (c = 'p') {
+#if defined(TONEDAC)
       toneHAL.playWav(filename);
+#endif
       SerialPort.println("Replaying file...");
     }
   }
