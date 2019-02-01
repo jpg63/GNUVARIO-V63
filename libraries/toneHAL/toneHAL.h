@@ -2,7 +2,19 @@
 #define toneHAL_h
 
 #include <Arduino.h>
-#include <VarioSettings.h>
+
+
+/*********************************************************************************/
+/*                                                                               */
+/*                           Libraries ToneHal                                   */
+/*                                                                               */
+/*  version    Date     Description                                              */
+/*    1.0    20/01/19                                                            */
+/*    1.1    24/01/19   Réecriture des classes                                   */
+/*                      répartition en plusieurs fichiers                        */
+/*    1.2    26/01/19   Modifications mineures                                   */
+/*                                                                               */
+/*********************************************************************************/
 
 
 #define WAVEFORM_SINUS			1
@@ -12,6 +24,10 @@
 
 	
 #define DEFAULT_VOLUME 			5
+
+/****************************/
+/* Interface Type           */
+/****************************/
 
 //#define TONEI2S
 #define	TONEDAC

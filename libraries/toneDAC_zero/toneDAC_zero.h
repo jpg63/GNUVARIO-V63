@@ -70,6 +70,7 @@ class ToneDacZero {
 };
 
 //extern Class_ToneDac toneDAC;
+extern SdFat SD;
 
 #endif
 	

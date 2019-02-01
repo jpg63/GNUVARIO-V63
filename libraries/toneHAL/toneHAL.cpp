@@ -6,12 +6,12 @@
 /*    1.0    20/01/19                                                            */
 /*    1.1    24/01/19   Réecriture des classes                                   */
 /*                      répartition en plusieurs fichiers                        */
+/*    1.2    26/01/19   Modifications mineures                                   */
 /*                                                                               */
 /*********************************************************************************/
 
 #include "toneHAL.h"
 #include <Arduino.h>
-#include <VarioSettings.h>
 
 #if defined(ESP8266)
 #elif defined(ESP32)

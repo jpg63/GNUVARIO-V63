@@ -4,13 +4,15 @@
 /*                                                  */
 /*  version    Date     Description                 */
 /*    1.0    20/01/19                               */
+/*    1.1    26/01/19   petites modifications       */
 /*                                                  */
 /****************************************************/
 
-
 #include "toneDAC_zero.h"
 #include <Arduino.h>
-#include <VarioSettings.h>
+
+#ifndef VARIO_SETTINGS_H
+#endif
 
 uint8_t  	waveForm = WAVEFORM_SINUS;
 volatile	int 			sIndex; //Tracks sinewave points in array

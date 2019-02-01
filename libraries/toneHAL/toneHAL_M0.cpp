@@ -1,7 +1,6 @@
 #include "toneHAL.h"
 #include "toneHAL_M0.h"
 #include <Arduino.h>
-#include <VarioSettings.h>
 
 #if defined(TONEDAC)
 
