@@ -39,5 +39,5 @@ Multi-platform :
                 DAC                               in development                 
                 I2S                               not yet developed              
 								
-##	VERSION 1.4.1
+##	VERSION 1.4.4
 								
