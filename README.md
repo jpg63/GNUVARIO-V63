@@ -36,8 +36,8 @@ Multi-platform :
                                                                                  
  ESP32          PWM 1 pin                         OK                             
                 PWM 2 pins                        not yet developed              
-                DAC                               in development                 
+                DAC                               OK                 
                 I2S                               not yet developed              
 								
-##	VERSION 1.4.4
+##	VERSION 1.4.6
 								

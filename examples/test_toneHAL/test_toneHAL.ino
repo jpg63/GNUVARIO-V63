@@ -17,8 +17,6 @@ const char *filename = "music.wav";
 
 #endif //TONEDAC_EXTENDED
 
-ToneHAL toneHAL;
-
 #define volumeDefault 2
 
 //indicate sample rate here (use audacity to convert your wav)

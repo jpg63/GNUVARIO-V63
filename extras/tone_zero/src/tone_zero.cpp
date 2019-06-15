@@ -16,17 +16,46 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-/****************************************************/
-/*                                                  */
-/*                 Tone_zero                        */
-/*                                                  */
-/*  version    Date     Description                 */
-/*    1.0    20/01/19                               */
-/*                                                  */
-/****************************************************/
+// ---------------------------------------------------------------------------
+//
+// SOUND Library Tone for MK0
+//
+// ----------------------------------------------------------------------------
+
+/***********************************************************************************/
+/*                                                                                 */
+/*                           Libraries tone_zero                                   */
+/*                                                                                 */
+/*  version    Date          Description                                           */
+/*    1.0.0    20/01/19				                                                     */
+/*    1.0.1    10/06/19      Ajout gestion ampli class D externe                   */
+/*                                                                                 */
+/***********************************************************************************/
+
 
 #include "Tone_zero.h"
 #include "variant.h"
+
+// BEEP PIN
+#ifndef SPEAKER_PIN
+#define SPEAKER_PIN 25		//or 26
+#endif
+
+#if not defined(_DEBUG_H_)
+#define TONEDAC_DEBUG					//debug Tone
+//#define SerialPort Serial
+#endif
+
+#ifndef PIN_AUDIO_AMP_ENA
+#define PIN_AUDIO_AMP_ENA 			34
+#endif
+
+#ifndef HAVE_AUDIO_AMPLI
+//#define HAVE_AUDIO_AMPLI
+#endif //HAVE_AUDIO_AMPLI
+
+#define AUDIO_AMP_ENABLE()   {digitalWrite(PIN_AUDIO_AMP_ENA , HIGH);}
+#define AUDIO_AMP_DISABLE()  {digitalWrite(PIN_AUDIO_AMP_ENA , LOW);}
 
 #define WAIT_TC16_REGS_SYNC(x) while(x->COUNT16.STATUS.bit.SYNCBUSY);
 
@@ -154,6 +183,21 @@ void ToneZero::tone (uint32_t outputPin, uint32_t frequency, uint32_t duration)
   WAIT_TC16_REGS_SYNC(TONE_TC)
   
   NVIC_EnableIRQ(TONE_TC_IRQn);
+	
+#ifdef HAVE_AUDIO_AMPLI
+	AUDIO_AMP_ENABLE();
+#endif //HAVE_AUDIO_AMPLI
+	
+}
+
+void ToneZero::init(void)
+{
+	#ifdef HAVE_AUDIO_AMPLI
+  digitalWrite(PIN_AUDIO_AMP_ENA , LOW);
+  pinMode(PIN_AUDIO_AMP_ENA , OUTPUT);
+
+	AUDIO_AMP_DESABLE();
+#endif //HAVE_AUDIO_AMPLI
 }
 
 void ToneZero::noTone (uint32_t outputPin)
@@ -161,6 +205,9 @@ void ToneZero::noTone (uint32_t outputPin)
   resetTC(TONE_TC);
   digitalWrite(outputPin, LOW);
   toneIsActive = false;
+#ifdef HAVE_AUDIO_AMPLI
+	AUDIO_AMP_DESABLE();
+#endif //HAVE_AUDIO_AMPLI
 }
 
 #ifdef __cplusplus

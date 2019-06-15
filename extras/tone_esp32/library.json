@@ -1,16 +1,16 @@
 {
-  "name": "M5Stack",
-  "description": "An ESP32 Arduino board",
-  "keywords": "M5Stack",
+  "name": "tone_esp32",
+  "description": "tone pwm for ESP32",
+  "keywords": "tone_esp32",
   "authors": {
-    "name": "Zibin, M5Stack",
-    "url": "http://www.m5stack.com"
+    "name": "jpg63",
+    "url": ""
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/m5stack/m5stack.git"
+    "url": ""
   },
-  "version": "0.2.5",
+  "version": "1.1.2",
   "framework": "arduino",
   "platforms": "espressif32"
 }
